@@ -3,11 +3,15 @@ package mflix.api.controllers;
 import mflix.api.models.BookingDTO;
 import mflix.api.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -15,6 +19,7 @@ import java.util.Map;
 public class BookingController extends ApiController {
   //  public class BookingController  {
   @Autowired private BookingService bookingService;
+
   public BookingController() {
     super();
   }
@@ -24,17 +29,23 @@ public class BookingController extends ApiController {
     return ResponseEntity.ok(Collections.emptyMap());
   }
 
-  @GetMapping(value = "/booking/{id}/{showing}")
-  ResponseEntity getBookings(
-      @PathVariable(value = "id") String id, @PathVariable(value = "showing") String showingTime) {
+  @GetMapping(value = "/booking")
+  public ResponseEntity getBookings(
+      @RequestParam(value = "id") String id,
+      @RequestParam(value = "showing") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+          Date bookedDated) {
+    System.out.println(id);
+    System.out.println(bookedDated);
+    List<BookingDTO> bookingDTOS = bookingService.getBookings(id, bookedDated);
 
-    return ResponseEntity.ok("");
+    return ResponseEntity.ok().body(bookingDTOS);
   }
 
   @PostMapping("/booking")
   public ResponseEntity addBooking(@RequestBody BookingDTO bookingDTO) {
     System.out.println(bookingDTO);
-    bookingService.addBooking(bookingDTO);
+    //    return ResponseEntity.ok().body("");
+    bookingDTO = bookingService.addBooking(bookingDTO);
 
     return ResponseEntity.ok(bookingDTO);
   }

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 @Configuration
 public class BookingService {
@@ -16,5 +19,9 @@ public class BookingService {
     public BookingDTO addBooking(BookingDTO bookingDTO) {
         bookingDao.addBooking(bookingDTO);
         return bookingDTO;
+    }
+
+    public List<BookingDTO> getBookings(String movieId, Date showing) {
+        return bookingDao.getBooking(movieId,showing);
     }
 }
