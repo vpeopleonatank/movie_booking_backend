@@ -30,6 +30,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private TokenAuthenticationService authService;
 
+  private static final String[] AUTH_WHITELIST = {
+
+    // -- swagger ui
+    "/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**"
+  };
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     JWTAuthenticationFilter authFilter = new JWTAuthenticationFilter();
@@ -44,6 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests()
         .antMatchers(HttpMethod.OPTIONS)
+        .permitAll()
+        .antMatchers(AUTH_WHITELIST)
         .permitAll()
         .antMatchers("/api/v1/movies/**")
         .permitAll()
