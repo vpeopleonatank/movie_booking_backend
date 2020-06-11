@@ -80,6 +80,7 @@ public class MoviesService {
     if (page == 0) {
       result.put("movies_count", movieDao.getMoviesCount());
     }
+    result.put("movies_count", movieDao.getMoviesCount());
     return result;
   }
 

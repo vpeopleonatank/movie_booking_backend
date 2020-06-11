@@ -101,6 +101,12 @@ public class MovieController extends ApiController {
           moviesService.getMoviesByGenre(MOVIES_PER_PAGE, page, genre), page, filters);
     }
 
+    if (page != null && page != 0) {
+
+      return buildOkResponse(
+          moviesService.getMovies(MOVIES_PER_PAGE, page), page, Collections.emptyMap());
+    }
+
     return index();
   }
 
