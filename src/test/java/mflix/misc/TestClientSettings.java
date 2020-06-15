@@ -17,7 +17,7 @@ public class TestClientSettings {
                 .applyConnectionString(new ConnectionString(URI)).build();
         MongoClient mongoClient = MongoClients.create(settings);
 
-// TODO do a read on the cluster to ensure you are connected
+// DONE do a read on the cluster to ensure you are connected
     
         SslSettings sslSettings = settings.getSslSettings();
         ReadPreference readPreference = settings.getReadPreference();

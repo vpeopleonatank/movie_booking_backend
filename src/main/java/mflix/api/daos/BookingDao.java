@@ -57,7 +57,7 @@ public class BookingDao extends AbstractMFlixDao {
   }
 
   public List<BookingDTO> getBooking(String movieId, Date showing) {
-    // TODO> Ticket: Subfield Text Search - implement the expected cast
+    // DONE> Ticket: Subfield Text Search - implement the expected cast
     // filter and sort
     List<BookingDTO> bookings = new ArrayList<>();
     List<Bson> pipeline = new ArrayList<>();

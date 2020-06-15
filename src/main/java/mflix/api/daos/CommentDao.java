@@ -80,9 +80,9 @@ public class CommentDao extends AbstractMFlixDao {
      * returns the resulting Comment object.
      */
     public Comment addComment(Comment comment) throws IncorrectDaoOperation {
-        // TODO> Ticket - Update User reviews: implement the functionality that enables adding a new
+        // DONE> Ticket - Update User reviews: implement the functionality that enables adding a new
         // comment.
-        // TODO> Ticket - Handling Errors: Implement a try catch block to
+        // DONE> Ticket - Handling Errors: Implement a try catch block to
         // handle a potential write exception when given a wrong commentId.
         if (comment.getId() == null) {
             throw new IncorrectDaoOperation("commentId is required.", new Throwable());
@@ -106,7 +106,7 @@ public class CommentDao extends AbstractMFlixDao {
      * @return true if successfully updates the comment text.
      */
     public boolean updateComment(String commentId, String text, String email) {
-        // TODO> Ticket - Update User reviews: implement the functionality that enables updating an
+        // DONE> Ticket - Update User reviews: implement the functionality that enables updating an
         // user own comments
         Comment comment = null;
         Bson queryFilter = Filters.and(
@@ -116,12 +116,12 @@ public class CommentDao extends AbstractMFlixDao {
         comment = commentCollection.find(queryFilter).first();
         if (comment != null) {
             UpdateResult updateResult = commentCollection.updateOne(queryFilter, set("text", text));
-            // TODO> Ticket - Handling Errors: Implement a try catch block to
+            // DONE> Ticket - Handling Errors: Implement a try catch block to
             // handle a potential write exception when given a wrong commentId.
             return updateResult.wasAcknowledged();
         }
         return false;
-        // TODO> Ticket - Handling Errors: Implement a try catch block to
+        // DONE> Ticket - Handling Errors: Implement a try catch block to
         // handle a potential write exception when given a wrong commentId.
     }
     
@@ -133,7 +133,7 @@ public class CommentDao extends AbstractMFlixDao {
      * @return true if successful deletes the comment.
      */
     public boolean deleteComment(String commentId, String email) {
-        // TODO> Ticket Delete Comments - Implement the method that enables the deletion of a user
+        // DONE> Ticket Delete Comments - Implement the method that enables the deletion of a user
         // comment
         // TIP: make sure to match only users that own the given commentId
         if (commentId.length() == 0) throw new IllegalArgumentException("commentId and email are both required.");
@@ -148,7 +148,7 @@ public class CommentDao extends AbstractMFlixDao {
             return true;
         }
         return false;
-        // TODO> Ticket Handling Errors - Implement a try catch block to
+        // DONE> Ticket Handling Errors - Implement a try catch block to
         // handle a potential write exception when given a wrong commentId.
     }
     
@@ -161,7 +161,7 @@ public class CommentDao extends AbstractMFlixDao {
      */
     public List<Critic> mostActiveCommenters() {
         List<Critic> mostActive = new ArrayList<>();
-        // // TODO> Ticket: User Report - execute a command that returns the
+        // // DONE> Ticket: User Report - execute a command that returns the
         // // list of 20 users, group by number of comments. Don't forget,
         // // this report is expected to be produced with an high durability
         // // guarantee for the returned documents. Once a commenter is in the

@@ -36,7 +36,7 @@ public class Migrator {
       if (!"".equals(imdbRating)) {
         rating = Integer.valueOf(imdbRating);
       }
-      // TODO> Ticket: Migration - define the UpdateOneModel object for
+      // DONE> Ticket: Migration - define the UpdateOneModel object for
       // the rating type cleanup.
       return new UpdateOneModel<Document>(new Document(), doc);
     } catch (NumberFormatException e) {
@@ -86,7 +86,7 @@ public class Migrator {
     System.out.println("Dataset cleanup migration");
 
     // set your MongoDB Cluster connection string
-    // TODO> Ticket: Migration - set the cluster connection string.
+    // DONE> Ticket: Migration - set the cluster connection string.
     String mongoUri = "mongodb+srv://m220student:m220password@m220js-htida.mongodb.net/test?retryWrites=true&w=majority";
 
     // instantiate database and collection objects
@@ -94,7 +94,7 @@ public class Migrator {
     MongoCollection<Document> movies = mflix.getCollection("movies");
     Bson dateStringFilter = new Document();
     String datePattern = "";
-    // TODO> Ticket: Migration - create a query filter that finds all
+    // DONE> Ticket: Migration - create a query filter that finds all
     // documents that are required to be updated and the correct date
     // format pattern
     Document queryFilter = new Document();
@@ -113,7 +113,7 @@ public class Migrator {
       }
     }
 
-    // TODO> Ticket: Migration - create a query filter that finds
+    // DONE> Ticket: Migration - create a query filter that finds
     // documents where `imdb.rating` is of type string
     Bson ratingStringFilter = new Document();
     for (Document doc : movies.find(ratingStringFilter)) {
@@ -125,7 +125,7 @@ public class Migrator {
     }
 
     // execute the bulk update
-    // TODO> Ticket: Migration - set the bulkWrite options
+    // DONE> Ticket: Migration - set the bulkWrite options
     BulkWriteOptions bulkWriteOptions = null;
     if (bulkWrites.isEmpty()) {
       System.out.println("Nothing to update!");

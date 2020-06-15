@@ -1,9 +1,8 @@
 package mflix.api.models;
 
-import java.util.List;
-
 public class Movie1 {
 
+  private String id;
   public String getId() {
     return id;
   }
@@ -13,7 +12,6 @@ public class Movie1 {
   }
 
   //    private String title;
-  private String id;
   //    private String poster;
   //    private List<Integer> genres = null;
   //    private String release_date;

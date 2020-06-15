@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/api/v1/movies/**")
         .permitAll()
+        .antMatchers("/api/v1/schedule/**")
+        .permitAll()
         .antMatchers("/")
         .permitAll()
         .antMatchers("/**/*.{js,html,css}")
