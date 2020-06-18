@@ -51,4 +51,14 @@ public class BookingController extends ApiController {
 
     return ResponseEntity.ok(bookingDTO);
   }
+
+  @GetMapping(value = "/bookingafterdate")
+  public ResponseEntity getBookings(
+          @RequestParam(value = "showing") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                  Date bookedDated) {
+    System.out.println(bookedDated);
+    List<BookingDTO> bookingDTOS = bookingService.getall(bookedDated);
+
+    return ResponseEntity.ok().body(bookingDTOS);
+  }
 }

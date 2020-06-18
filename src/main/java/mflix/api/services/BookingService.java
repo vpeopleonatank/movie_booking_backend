@@ -24,4 +24,9 @@ public class BookingService {
     public List<BookingDTO> getBookings(String movieId, Date showing) {
         return bookingDao.getBooking(movieId,showing);
     }
+
+
+    public List<BookingDTO> getall(Date showing) {
+        return bookingDao.getall(showing);
+    }
 }

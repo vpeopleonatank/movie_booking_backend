@@ -76,4 +76,24 @@ public class BookingDao extends AbstractMFlixDao {
 
     return bookings;
   }
+
+
+  public List<BookingDTO> getall(Date showing) {
+    // DONE> Ticket: Subfield Text Search - implement the expected cast
+    // filter and sort
+    List<BookingDTO> bookings = new ArrayList<>();
+    List<Bson> pipeline = new ArrayList<>();
+    // match stage to find movie
+    System.out.println("get booking dao");
+    System.out.println(showing);
+    Bson matchShowing = Aggregates.match(Filters.gte("showing", showing));
+    pipeline.add(matchShowing);
+    AggregateIterable<BookingDTO> iterable = bookingCollection.aggregate(pipeline);
+//    AggregateIterable<Document> iterable = bookingCollection2.aggregate(pipeline);
+//    List<Document> documents = new ArrayList<>();
+    iterable.into(bookings);
+//    iterable.into(documents);
+
+    return bookings;
+  }
 }
