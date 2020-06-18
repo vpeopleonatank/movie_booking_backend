@@ -3,6 +3,7 @@ package mflix.api.services;
 import mflix.api.daos.MovieDao;
 import mflix.api.daos.ScheduleDao;
 import mflix.api.models.FilmSchedule;
+import mflix.api.models.Movie;
 import mflix.api.models.MovieSchedule;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -62,7 +63,8 @@ public class ScheduleService {
 
         List<Document> documents = movieDao.getMovieAndScheduleByDate(date);
         List<MovieSchedule> movieSchedules = mapToMovieScheduleSingleSchedule(documents);
-        for (MovieSchedule movieSchedule : movieSchedules) {
+        for (Iterator<MovieSchedule> movieScheduleIterator = movieSchedules.iterator(); movieScheduleIterator.hasNext(); ) {
+            MovieSchedule movieSchedule = movieScheduleIterator.next();
             Iterator<String> iter = movieSchedule.getFilmSchedule().getTime().iterator();
             while (iter.hasNext()) {
                 String str = iter.next();
@@ -71,6 +73,9 @@ public class ScheduleService {
                 if (cmpS < 0 || cmpE > 0) {
                     iter.remove();
                 }
+            }
+            if (movieSchedule.getFilmSchedule().getTime().size() == 0) {
+                movieScheduleIterator.remove();
             }
         }
 
@@ -94,15 +99,15 @@ public class ScheduleService {
         filmSchedule.setMovieId(movieId);
         filmSchedule.setDate(date);
         LinkedHashSet<String> listtime = new LinkedHashSet<>();
-        for (Iterator<String> s = filmSchedulebase.getTime().iterator(); s.hasNext() ;) {
+        for (Iterator<String> s = filmSchedulebase.getTime().iterator(); s.hasNext(); ) {
             String currTime = s.next();
             if (currTime.equals(time)) continue;
             listtime.add(currTime);
         }
-        listtime.add(newtime) ;
+        listtime.add(newtime);
         filmSchedule.setTime(listtime);
 
-        boolean res = scheduleDao.updateSchedule(filmSchedule) ;
+        boolean res = scheduleDao.updateSchedule(filmSchedule);
         return res;
     }
 

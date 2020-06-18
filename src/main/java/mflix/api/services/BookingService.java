@@ -26,7 +26,7 @@ public class BookingService {
     }
 
 
-    public List<BookingDTO> getall(Date showing) {
-        return bookingDao.getall(showing);
+    public List<BookingDTO> getall() {
+        return bookingDao.getall();
     }
 }
