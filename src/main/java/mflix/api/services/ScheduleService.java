@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.sql.Array;
+import java.sql.Time;
+import java.util.*;
 
 import static mflix.api.daos.MovieDocumentMapper.mapToMovieSchedule;
 import static mflix.api.daos.MovieDocumentMapper.mapToMovieScheduleSingleSchedule;
@@ -76,6 +75,35 @@ public class ScheduleService {
         }
 
         return movieSchedules;
+    }
+
+
+    public List<MovieSchedule> getMovieScheduleByDate(Date date) {
+
+        List<Document> documents = movieDao.getMovieAndScheduleByDate(date);
+        List<MovieSchedule> movieSchedules = mapToMovieScheduleSingleSchedule(documents);
+
+        return movieSchedules;
+    }
+
+    public boolean updateSchedule(String movieId, Date date, String time, String newtime) {
+
+        FilmSchedule filmSchedulebase = scheduleDao.getScheduleByMovieIdAndDate(movieId, date);
+
+        FilmSchedule filmSchedule = new FilmSchedule();
+        filmSchedule.setMovieId(movieId);
+        filmSchedule.setDate(date);
+        LinkedHashSet<String> listtime = new LinkedHashSet<>();
+        for (Iterator<String> s = filmSchedulebase.getTime().iterator(); s.hasNext() ;) {
+            String currTime = s.next();
+            if (currTime.equals(time)) continue;
+            listtime.add(currTime);
+        }
+        listtime.add(newtime) ;
+        filmSchedule.setTime(listtime);
+
+        boolean res = scheduleDao.updateSchedule(filmSchedule) ;
+        return res;
     }
 
 }

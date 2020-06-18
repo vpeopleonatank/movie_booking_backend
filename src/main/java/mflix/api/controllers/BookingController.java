@@ -47,7 +47,6 @@ public class BookingController extends ApiController {
   @PostMapping("/booking")
   public ResponseEntity addBooking(@RequestBody BookingDTO bookingDTO) {
     System.out.println(bookingDTO);
-    //    return ResponseEntity.ok().body("");
     bookingDTO = bookingService.addBooking(bookingDTO);
 
     return ResponseEntity.ok(bookingDTO);

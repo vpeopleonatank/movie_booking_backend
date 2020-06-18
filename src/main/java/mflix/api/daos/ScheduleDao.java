@@ -59,13 +59,15 @@ public class ScheduleDao extends AbstractMFlixDao {
   }
 
   public FilmSchedule getScheduleByMovieIdAndDate(String movieId, Date date) {
-    Bson movieFilter = Aggregates.match(Filters.in("movie_id", new ObjectId(movieId)));
+    Bson movieFilter = Aggregates.match(Filters.eq("movie_id", new ObjectId(movieId)));
     Bson dateFilter = Aggregates.match(Filters.eq("date", date));
     List<Bson> pipeline = new ArrayList<>();
     pipeline.add(movieFilter);
-    pipeline.add(dateFilter);
-
-    FilmSchedule filmSchedule = scheduleCollection.aggregate(pipeline).first();
+   pipeline.add(dateFilter);
+    AggregateIterable<FilmSchedule> iterable = scheduleCollection.aggregate(pipeline);
+//    AggregateIterable<Document> iterable = bookingCollection2.aggregate(pipeline);
+//    List<Document> documents = new ArrayList<>();
+    FilmSchedule filmSchedule = iterable.first();
 
     //    Bson
     return filmSchedule;
