@@ -4,157 +4,168 @@ import java.util.Date;
 import java.util.List;
 
 public class MovieSchedule extends AbstractMovie {
-  private int year;
-  private List<String> cast;
-  private String plog;
-  private String fullPlot;
-  private Date lastUpdated;
-  private String type;
-  private String poster;
-  private List<String> directors;
-  private List<String> writers;
-  private IMDB imdb;
+    private int year;
+    private List<String> cast;
+    private String plog;
+    private String fullPlot;
+    private Date lastUpdated;
+    private String type;
+    private String poster;
+    private List<String> directors;
+    private List<String> writers;
+    private IMDB imdb;
 
-  private List<String> countries;
-  private List<String> genres;
+    private List<String> countries;
+    private List<String> genres;
 
-  private RottenTomatoes tomatoes;
+    private RottenTomatoes tomatoes;
 
-  private List<String> time;
+    private List<String> time;
 
-  private Date currScheduleDate;
+    private Date currScheduleDate;
 
-  private List<FilmSchedule> filmSchedules;
+    private List<FilmSchedule> filmSchedules;
 
-  public List<FilmSchedule> getFilmSchedules() {
-    return filmSchedules;
-  }
+    public List<FilmSchedule> getFilmSchedules() {
+        return filmSchedules;
+    }
 
-  public void setFilmSchedules(List<FilmSchedule> filmSchedules) {
-    this.filmSchedules = filmSchedules;
-  }
+    private FilmSchedule filmSchedule;
 
-  public Date getCurrScheduleDate() {
-    return currScheduleDate;
-  }
+    public FilmSchedule getFilmSchedule() {
+        return filmSchedule;
+    }
 
-  public void setCurrScheduleDate(Date currScheduleDate) {
-    this.currScheduleDate = currScheduleDate;
-  }
+    public void setFilmSchedule(FilmSchedule filmSchedule) {
+        this.filmSchedule = filmSchedule;
+    }
 
-  public List<String> getTime() {
-    return time;
-  }
 
-  public void setTime(List<String> time) {
-    this.time = time;
-  }
+    public void setFilmSchedules(List<FilmSchedule> filmSchedules) {
+        this.filmSchedules = filmSchedules;
+    }
 
-  public MovieSchedule() {
-    super();
-  }
+    public Date getCurrScheduleDate() {
+        return currScheduleDate;
+    }
 
-  public int getYear() {
-    return year;
-  }
+    public void setCurrScheduleDate(Date currScheduleDate) {
+        this.currScheduleDate = currScheduleDate;
+    }
 
-  public void setYear(int year) {
-    this.year = year;
-  }
+    public List<String> getTime() {
+        return time;
+    }
 
-  public List<String> getCast() {
-    return cast;
-  }
+    public void setTime(List<String> time) {
+        this.time = time;
+    }
 
-  public void setCast(List<String> cast) {
-    this.cast = cast;
-  }
+    public MovieSchedule() {
+        super();
+    }
 
-  public String getPlog() {
-    return plog;
-  }
+    public int getYear() {
+        return year;
+    }
 
-  public void setPlog(String plog) {
-    this.plog = plog;
-  }
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-  public String getFullPlot() {
-    return fullPlot;
-  }
+    public List<String> getCast() {
+        return cast;
+    }
 
-  public void setFullPlot(String fullPlot) {
-    this.fullPlot = fullPlot;
-  }
+    public void setCast(List<String> cast) {
+        this.cast = cast;
+    }
 
-  public Date getLastUpdated() {
-    return lastUpdated;
-  }
+    public String getPlog() {
+        return plog;
+    }
 
-  public void setLastUpdated(Date lastUpdated) {
-    this.lastUpdated = lastUpdated;
-  }
+    public void setPlog(String plog) {
+        this.plog = plog;
+    }
 
-  public String getType() {
-    return type;
-  }
+    public String getFullPlot() {
+        return fullPlot;
+    }
 
-  public void setType(String type) {
-    this.type = type;
-  }
+    public void setFullPlot(String fullPlot) {
+        this.fullPlot = fullPlot;
+    }
 
-  public List<String> getDirectors() {
-    return directors;
-  }
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
 
-  public void setDirectors(List<String> directors) {
-    this.directors = directors;
-  }
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
-  public List<String> getWriters() {
-    return writers;
-  }
+    public String getType() {
+        return type;
+    }
 
-  public void setWriters(List<String> writers) {
-    this.writers = writers;
-  }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-  public IMDB getImdb() {
-    return imdb;
-  }
+    public List<String> getDirectors() {
+        return directors;
+    }
 
-  public void setImdb(IMDB imdb) {
-    this.imdb = imdb;
-  }
+    public void setDirectors(List<String> directors) {
+        this.directors = directors;
+    }
 
-  public List<String> getCountries() {
-    return countries;
-  }
+    public List<String> getWriters() {
+        return writers;
+    }
 
-  public void setCountries(List<String> countries) {
-    this.countries = countries;
-  }
+    public void setWriters(List<String> writers) {
+        this.writers = writers;
+    }
 
-  public RottenTomatoes getTomatoes() {
-    return tomatoes;
-  }
+    public IMDB getImdb() {
+        return imdb;
+    }
 
-  public void setTomatoes(RottenTomatoes tomatoes) {
-    this.tomatoes = tomatoes;
-  }
+    public void setImdb(IMDB imdb) {
+        this.imdb = imdb;
+    }
 
-  public List<String> getGenres() {
-    return genres;
-  }
+    public List<String> getCountries() {
+        return countries;
+    }
 
-  public void setGenres(List<String> genres) {
-    this.genres = genres;
-  }
+    public void setCountries(List<String> countries) {
+        this.countries = countries;
+    }
 
-  public String getPoster() {
-    return poster;
-  }
+    public RottenTomatoes getTomatoes() {
+        return tomatoes;
+    }
 
-  public void setPoster(String poster) {
-    this.poster = poster;
-  }
+    public void setTomatoes(RottenTomatoes tomatoes) {
+        this.tomatoes = tomatoes;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
 }

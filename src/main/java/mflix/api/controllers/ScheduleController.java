@@ -2,16 +2,16 @@ package mflix.api.controllers;
 
 import mflix.api.models.FilmScheduleDTO;
 import mflix.api.models.MovieSchedule;
-import mflix.api.services.BookingService;
 import mflix.api.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import static mflix.api.daos.MovieDocumentMapper.parseDate;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -41,11 +41,14 @@ public class ScheduleController {
       @RequestParam(value = "movieId", required = false) String movieId,
       @RequestParam(value = "startTime", required = false) String startTime,
       @RequestParam(value = "endTime", required = false) String endTime) {
-    if (movieId == null) {
-
+    Map<String, Object> results = new HashMap<>();
+    if (movieId == null && startTime != null && endTime != null && date != null) {
+      List<MovieSchedule> movieSchedules = scheduleService.getMovieScheduleByDateAndTimerange(date, startTime, endTime);
+      results.put("movies", movieSchedules);
+      return ResponseEntity.ok(results);
     } else if (startTime == null && endTime == null) {
       MovieSchedule movieSchedule =
-          scheduleService.getMovieScheduleByDate(movieId, date);
+          scheduleService.getMovieScheduleAfterDate(movieId, date);
       return ResponseEntity.ok(movieSchedule);
     }
     return ResponseEntity.badRequest().build();
