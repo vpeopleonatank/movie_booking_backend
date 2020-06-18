@@ -7,6 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -31,9 +34,9 @@ public class BookingController extends ApiController {
 
   @GetMapping(value = "/booking")
   public ResponseEntity getBookings(
-      @RequestParam(value = "id") String id,
-      @RequestParam(value = "showing") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-          Date bookedDated) {
+          @RequestParam(value = "id") String id,
+          @RequestParam(value = "showing") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                  Date bookedDated) {
     System.out.println(id);
     System.out.println(bookedDated);
     List<BookingDTO> bookingDTOS = bookingService.getBookings(id, bookedDated);

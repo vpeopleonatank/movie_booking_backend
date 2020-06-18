@@ -1,6 +1,5 @@
 package mflix.api.daos;
 
-import com.sun.org.apache.bcel.internal.generic.DCONST;
 import mflix.api.models.*;
 import org.bson.Document;
 
@@ -16,7 +15,6 @@ import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.print.Doc;
 
 @SuppressWarnings("unchecked")
 public class MovieDocumentMapper {

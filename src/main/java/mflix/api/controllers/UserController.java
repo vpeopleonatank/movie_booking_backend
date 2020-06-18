@@ -1,11 +1,13 @@
 package mflix.api.controllers;
 
+import com.sun.net.httpserver.Headers;
 import mflix.api.models.Login;
 import mflix.api.models.User;
 import mflix.api.models.UserRegistry;
 import mflix.api.services.MoviesService;
 import mflix.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
@@ -106,6 +109,7 @@ public class UserController extends ApiController {
     return ResponseEntity.ok(results);
   }
 
+
   @PostMapping("/make-admin")
   public ResponseEntity makeUserAdmin(@RequestBody UserRegistry registry) {
     Map<String, String> results = new HashMap<>();
@@ -118,6 +122,35 @@ public class UserController extends ApiController {
 
     return authenticateUser(new Login(registry.getEmail(), registry.getPassword()));
   }
+
+    @PostMapping("/adduser")
+    public ResponseEntity adduser(@RequestBody UserRegistry registry) {
+      Map<String, String> results = new HashMap<>();
+      User user = userService.createUser(registry, results);
+
+      if (user == null || user.isEmpty()) {
+        results.put("status", "fail");
+        return ResponseEntity.badRequest().body(results);
+      }
+      results.put("status", "success");
+      return ResponseEntity.badRequest().body(results);
+    }
+
+  @PutMapping("/updateuser")
+  public ResponseEntity updateuser(@RequestBody User user1) {
+    Map<String, String> results = new HashMap<>();
+    Boolean user = userService.updateUser(user1, results);
+
+    if (user == false) {
+      results.put("status", "fail");
+      return ResponseEntity.badRequest().body(results);
+    }
+    results.put("status", "success");
+    return ResponseEntity.badRequest().body(results);
+  }
+
+
+
 
   @GetMapping("/comment-report")
   public ResponseEntity getCommentReport(
@@ -134,6 +167,27 @@ public class UserController extends ApiController {
     results.put("report", moviesService.mostActiveUsers());
     return ResponseEntity.ok(results);
   }
+
+
+  @DeleteMapping("/deletebyusername")
+  public ResponseEntity deletebyusername(
+          @RequestParam(name= "user") String id) {
+    Map results = new HashMap<String, String>();
+    if (!userService.deleteUserByUser(id, results)) {
+      return ResponseEntity.badRequest().body(results);
+    }
+    Map<String, String> response = new HashMap<>();
+    response.put("success", "deleted");
+    return ResponseEntity.ok(response);
+  }
+
+  @GetMapping("/getall")
+  public ResponseEntity<List<User>> getall(){
+
+    Map<String, String> response = new HashMap<>();
+    return new ResponseEntity<>(userService.getall(), new HttpHeaders(), HttpStatus.OK);
+  }
+
 
   @Override
   ResponseEntity<Map> index() {

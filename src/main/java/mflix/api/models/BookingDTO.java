@@ -8,12 +8,23 @@ public class BookingDTO {
   private Movie1 movie;
   private Date showing;
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  private String username ;
+
   @Override
   public String toString() {
     return "BookingDTO{" +
             "movie=" + movie +
             ", showing=" + showing +
             ", seats=" + seats +
+            ", username " + username +
             '}';
   }
 

@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public abstract class AbstractMFlixDao {
+public abstract class AbstractMFlixDao  {
 
   @Value("${spring.mongodb.uri}")
   private String connectionString;

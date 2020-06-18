@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.print.DocFlavor;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -80,6 +82,8 @@ public class UserService implements UserDetailsService {
     return null;
   }
 
+
+
   public User loadUser(String email) {
     return userDao.getUser(email);
   }
@@ -128,6 +132,7 @@ public class UserService implements UserDetailsService {
    * @param results - hash map to collect any error message
    * @return true if successful deletes the user from mflix
    */
+
   public boolean deleteUser(String email, String password, Map<String, String> results) {
     // check if hashed password matches
     String hpwd = passwordEncoder.encode(password);
@@ -144,6 +149,24 @@ public class UserService implements UserDetailsService {
     return userDao.deleteUser(email);
   }
 
+  public boolean deleteUserByUser(String id, Map<String, String> results) {
+    // check if hashed password matches
+    return userDao.deleteUser(id);
+  }
+
+
+  public boolean updateUser(User user, Map<String, String> results) {
+    // check if hashed password matches
+    return userDao.updateUser(user);
+  }
+  public List<User> getall(){
+    return userDao.getall();
+  }
+
+
+  public  User getByID(String id){
+      return  userDao.getUserbyId(id) ;
+  }
   /**
    * Updates the user preferences settings.
    *
